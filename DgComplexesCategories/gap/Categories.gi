@@ -29,6 +29,11 @@ InstallMethod( DgCochainComplexCategory,
     
     ADD_FUNCTIONS_OF_HOMOMORPHISM_STRUCTURE_TO_DG_COCHAIN_COMPLEX_CATEGORY( dgCh_cat );
     
+    dgCh_cat!.compiler_hints :=
+      rec( category_filter := IsDgChainOrCochainComplexCategory,
+           object_filter := IsDgComplex,
+           morphism_filter := IsDgComplexMorphism );
+    
     Finalize( dgCh_cat );
     
     return dgCh_cat;

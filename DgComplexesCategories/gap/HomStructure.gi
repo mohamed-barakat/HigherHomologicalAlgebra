@@ -30,7 +30,7 @@ InstallGlobalFunction( ADD_FUNCTIONS_OF_HOMOMORPHISM_STRUCTURE_TO_DG_COCHAIN_COM
     
     AddDistinguishedObjectOfHomomorphismStructure( dgCh_cat,
       function( dgCh_cat )
-        local cat, range_cat, distinguished_object, diffs;
+        local cat, range_cat, dgCh_range_cat, distinguished_object, diffs;
         
         cat := UnderlyingCategory( dgCh_cat );
         

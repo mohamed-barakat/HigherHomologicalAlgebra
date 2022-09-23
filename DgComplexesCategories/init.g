@@ -7,3 +7,4 @@ ReadPackage( "DgComplexesCategories", "gap/Categories.gd" );
 ReadPackage( "DgComplexesCategories", "gap/Complexes.gd" );
 ReadPackage( "DgComplexesCategories", "gap/ChainMaps.gd" );
 ReadPackage( "DgComplexesCategories", "gap/HomStructure.gd" );
+ReadPackage( "DgComplexesCategories", "gap/DgComplexesOfAdditiveClosureOfAlgebroid.gd" );

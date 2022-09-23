@@ -13,7 +13,8 @@ oid := QF / [ QF.dA_0 * QF.dA_1, QF.dA_1 * QF.dA_2, QF.dA_2 * QF.dA_3, QF.dB_0 *
 #AssignSetOfGeneratingMorphisms( oid );
 
 Aoid := AdditiveClosure( oid );
-dgCh_Aoid := DgCochainComplexCategory( Aoid );
+#dgCh_Aoid := DgCochainComplexCategory( Aoid );
+dgCh_Aoid := DgComplexesOfAdditiveClosureOfAlgebroid( oid );
 
 A := DgCochainComplex( dgCh_Aoid, [ Aoid.dA_0, Aoid.dA_1, Aoid.dA_2, Aoid.dA_3 ], 0 );
 B := DgCochainComplex( dgCh_Aoid, [ Aoid.dB_0, Aoid.dB_1 ], 0 );
