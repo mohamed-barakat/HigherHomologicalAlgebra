@@ -3,12 +3,14 @@ LoadPackage( "DgComplexesCategories" );
 
 
 q := RightQuiver( "q(A0,A1,A2,A3,A4,B0,B1,B2,C0,C1,C2,D0,D1,D2,)[dA_0:A0->A1,dA_1:A1->A2,dA_2:A2->A3,dA_3:A3->A4,dB_0:B0->B1,dB_1:B1->B2,dC_0:C0->C1,dC_1:C1->C2,dD_0:D0->D1,dD_1:D1->D2,phi_2:A2->B0,phi_3:A3->B1,phi_4:A4->B2,psi_0:C0->D1,psi_1:C1->D2,z2:B2->C0,i1:B1->C0,i2:B2->C1,p0:B0->C0,p1:B1->C1,p2:B2->C2,q0:B0->C1,q1:B1->C2,r0:B0->C2]" );
-kq := PathAlgebra( HomalgFieldOfRationals( ), q );
-B := kq / [ kq.dA_0*kq.dA_1,kq.dA_1*kq.dA_2,kq.dA_2*kq.dA_3,kq.dB_0*kq.dB_1, kq.dC_0*kq.dC_1, kq.dD_0*kq.dD_1];
 
-oid := Algebroid( B );
-AssignSetOfObjects( oid );
-AssignSetOfGeneratingMorphisms( oid );
+F := FreeCategory( q );
+Q := HomalgFieldOfRationals( );
+QF := Q[F];
+oid := QF / [ QF.dA_0 * QF.dA_1, QF.dA_1 * QF.dA_2, QF.dA_2 * QF.dA_3, QF.dB_0 * QF.dB_1,  QF.dC_0 * QF.dC_1,  QF.dD_0 * QF.dD_1 ];
+
+#AssignSetOfObjects( oid );
+#AssignSetOfGeneratingMorphisms( oid );
 
 Aoid := AdditiveClosure( oid );
 dgCh_Aoid := DgCochainComplexCategory( Aoid );
