@@ -254,7 +254,15 @@ InstallMethod( LaTeXOutput,
         [ IsDgCochainComplexMorphism ],
         
   function( phi )
-    local l, u, latex_string, i, OnlyDatum;
+    local arrow, l, u, latex_string, i, OnlyDatum;
+    
+    if DegreeOfDgComplexMorphism( phi ) > 0 then
+        arrow := "{}^{\\nearrow}";
+    elif DegreeOfDgComplexMorphism( phi ) < 0 then
+        arrow := "{}_{\\searrow}";
+    else
+        arrow := "\\rightarrow";
+    fi;
     
     l := Minimum( LowerBoundOfDgComplex( Source( phi ) ), LowerBoundOfDgComplex( Range( phi ) ) );
     u := Maximum( UpperBoundOfDgComplex( Source( phi ) ), UpperBoundOfDgComplex( Range( phi ) ) );
@@ -280,7 +288,7 @@ InstallMethod( LaTeXOutput,
               LaTeXOutput( Source( phi )[ u ] ),
               "&-{",
               LaTeXOutput( phi[ u ] : OnlyDatum := true ),
-              "}\\rightarrow&",
+              "}", arrow,"&",
               LaTeXOutput( Range( phi )[ u ] ),
               "\n \\\\ \n"
             );
@@ -316,7 +324,7 @@ InstallMethod( LaTeXOutput,
               LaTeXOutput( Source( phi )[ i ] ),
               "&-{",
               LaTeXOutput( phi[ i ] : OnlyDatum := true ),
-              "}\\rightarrow&",
+              "}", arrow,"&",
               LaTeXOutput( Range( phi )[ i ] ),
               "\n \\\\ \n "
             );
