@@ -37,6 +37,8 @@ DeclareGlobalFunction( "VoidZFunction" );
 DeclareAttribute( "AsZFunction", IsFunction );
 #! @InsertChunk AsZFunction
 
+CapJitAddTypeSignature( "AsZFunction", [ IsFunction ], IsZFunction );
+
 #! @Description
 #! The argument is a <A>z_func</A>. The output is its <C>UnderlyingFunction</C> function. I.e., the function that will be applied on index <C>i</C>
 #! whenever we call <A>z_func</A>[<C>i</C>].

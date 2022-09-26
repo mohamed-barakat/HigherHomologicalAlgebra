@@ -28,8 +28,17 @@ DeclareOperation( "DgCochainComplexMorphism", [ IsDgCochainComplex, IsDgCochainC
 
 DeclareOperation( "DgCochainComplexMorphism", [ IsDgCochainComplex, IsDgCochainComplex, IsInt, IsDenseList, IsInt ] );
 
+CapJitAddTypeSignature( "DgCochainComplexMorphism", [ IsDgCochainComplex, IsDgCochainComplex, IsInt, IsList, IsInt ], function ( input_types )
+    
+    Assert( 0, IsDgCochainComplexCategory( input_types[1].category ) );
+    
+    return CapJitDataTypeOfMorphismOfCategory( input_types[1].category );
+    
+end );
 
 DeclareAttribute( "DegreeOfDgComplexMorphism", IsDgComplexMorphism );
+
+CapJitAddTypeSignature( "DegreeOfDgComplexMorphism", [ IsDgComplexMorphism ], IsInt );
 
 DeclareAttribute( "Differential", IsDgComplexMorphism );
 
@@ -45,9 +54,21 @@ DeclareAttribute( "WitnessForExactnessOfDgComplexMorphism", IsDgComplexMorphism 
 
 DeclareAttribute( "Morphisms", IsDgComplexMorphism );
 KeyDependentOperation( "MorphismAt", IsDgComplexMorphism, IsInt, ReturnTrue );
+
 DeclareOperation( "\[\]", [ IsDgComplexMorphism, IsInt ] );
 
+CapJitAddTypeSignature( "\[\]", [ IsDgComplexMorphism, IsInt ], function ( input_types )
+    
+    return CapJitDataTypeOfMorphismOfCategory( UnderlyingCategory( input_types[1].category ) );
+    
+end );
+
 DeclareAttribute( "UpperBoundOfDgComplexMorphism", IsDgComplexMorphism );
+
+CapJitAddTypeSignature( "UpperBoundOfDgComplexMorphism", [ IsDgComplexMorphism ], IsInt );
+
 DeclareAttribute( "LowerBoundOfDgComplexMorphism", IsDgComplexMorphism );
+
+CapJitAddTypeSignature( "LowerBoundOfDgComplexMorphism", [ IsDgComplexMorphism ], IsInt );
 
 DeclareOperation( "Display", [ IsDgComplexMorphism, IsInt, IsInt ] );

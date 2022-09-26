@@ -340,7 +340,9 @@ function ( cat_1, arg2_1, arg3_1 )
                                 return List( logic_new_func_list_4, UnderlyingQuiverAlgebraElement );
                             end );
                         hoisted_21_3 := deduped_35_3;
-                        hoisted_20_3 := List( deduped_38_3, UnderlyingVertex );
+                        hoisted_20_3 := List( deduped_38_3, function ( logic_new_func_x_4 )
+                                return QuiverVertexAsIdentityPath( UnderlyingVertex( logic_new_func_x_4 ) );
+                            end );
                         hoisted_29_3 := List( deduped_35_3, function ( logic_new_func_x_4 )
                                 local hoisted_1_4;
                                 hoisted_1_4 := PathAsAlgebraElement( hoisted_6_1, hoisted_20_3[logic_new_func_x_4] );
@@ -489,7 +491,9 @@ function ( cat_1, arg2_1, arg3_1 )
                                               end ) );
                                     end ) ) ) );
                         hoisted_9_3 := logic_new_func_x_3 + 1;
-                        hoisted_4_3 := List( deduped_41_3, UnderlyingVertex );
+                        hoisted_4_3 := List( deduped_41_3, function ( logic_new_func_x_4 )
+                                return QuiverVertexAsIdentityPath( UnderlyingVertex( logic_new_func_x_4 ) );
+                            end );
                         hoisted_3_3 := deduped_37_3;
                         hoisted_8_3 := List( deduped_37_3, function ( logic_new_func_x_4 )
                                 local hoisted_1_4;
@@ -689,7 +693,9 @@ function ( cat_1, a_1 )
               deduped_5_2 := ObjectList( deduped_6_2 );
               deduped_4_2 := [ 1 .. Length( deduped_5_2 ) ];
               hoisted_3_2 := deduped_4_2;
-              hoisted_2_2 := List( deduped_5_2, UnderlyingVertex );
+              hoisted_2_2 := List( deduped_5_2, function ( logic_new_func_x_3 )
+                      return QuiverVertexAsIdentityPath( UnderlyingVertex( logic_new_func_x_3 ) );
+                  end );
               hoisted_1_2 := deduped_5_2;
               return CreateCapCategoryMorphismWithAttributes( hoisted_4_1, deduped_6_2, deduped_6_2, MorphismMatrix, List( deduped_4_2, function ( i_3 )
                         local hoisted_1_3, hoisted_2_3, deduped_3_3;
@@ -1040,72 +1046,108 @@ end
         
 ########
 function ( cat_1, arg2_1 )
-    local hoisted_1_1, hoisted_2_1, hoisted_3_1, hoisted_4_1, deduped_5_1, deduped_6_1;
-    deduped_6_1 := Range( arg2_1 );
-    deduped_5_1 := Source( arg2_1 );
-    hoisted_4_1 := deduped_6_1;
-    hoisted_3_1 := DegreeOfDgComplexMorphism( arg2_1 );
-    hoisted_2_1 := deduped_5_1;
-    hoisted_1_1 := UnderlyingCategory( UnderlyingCategory( cat_1 ) );
-    return ForAll( [ Minimum( LowerBoundOfDgComplex( deduped_5_1 ), LowerBoundOfDgComplex( deduped_6_1 ) ) .. Maximum( UpperBoundOfDgComplex( deduped_5_1 ), UpperBoundOfDgComplex( deduped_6_1 ) ) ], function ( i_2 )
-            local hoisted_1_2, hoisted_2_2, hoisted_3_2, hoisted_4_2, hoisted_5_2, hoisted_6_2, hoisted_7_2, hoisted_8_2, hoisted_9_2, deduped_10_2, deduped_11_2, deduped_12_2, deduped_13_2, deduped_14_2, deduped_15_2, deduped_16_2, deduped_17_2, deduped_18_2, deduped_19_2;
-            deduped_19_2 := arg2_1[i_2];
-            deduped_18_2 := ObjectList( hoisted_2_1[i_2] );
-            deduped_17_2 := MorphismMatrix( deduped_19_2 );
-            deduped_16_2 := ObjectList( hoisted_4_1[i_2 + hoisted_3_1] );
-            deduped_15_2 := ObjectList( Range( deduped_19_2 ) );
-            deduped_14_2 := ObjectList( Source( deduped_19_2 ) );
-            deduped_13_2 := Length( deduped_15_2 );
-            deduped_12_2 := Length( deduped_14_2 );
-            deduped_11_2 := [ 1 .. deduped_13_2 ];
-            deduped_10_2 := [ 1 .. deduped_12_2 ];
-            hoisted_9_2 := List( deduped_16_2, UnderlyingVertex );
-            hoisted_8_2 := List( deduped_18_2, UnderlyingVertex );
-            hoisted_7_2 := List( deduped_15_2, UnderlyingVertex );
-            hoisted_6_2 := List( deduped_17_2, function ( logic_new_func_x_3 )
+    local hoisted_1_1, hoisted_2_1, hoisted_3_1, hoisted_4_1, hoisted_5_1, deduped_6_1, deduped_7_1, deduped_8_1;
+    deduped_8_1 := Range( arg2_1 );
+    deduped_7_1 := Source( arg2_1 );
+    deduped_6_1 := UnderlyingCategory( UnderlyingCategory( cat_1 ) );
+    hoisted_5_1 := deduped_8_1;
+    hoisted_4_1 := DegreeOfDgComplexMorphism( arg2_1 );
+    hoisted_3_1 := deduped_7_1;
+    hoisted_2_1 := UnderlyingQuiverAlgebra( deduped_6_1 );
+    hoisted_1_1 := deduped_6_1;
+    return ForAll( [ Minimum( LowerBoundOfDgComplex( deduped_7_1 ), LowerBoundOfDgComplex( deduped_8_1 ) ) .. Maximum( UpperBoundOfDgComplex( deduped_7_1 ), UpperBoundOfDgComplex( deduped_8_1 ) ) ], function ( i_2 )
+            local hoisted_1_2, hoisted_2_2, hoisted_3_2, hoisted_4_2, hoisted_5_2, hoisted_6_2, hoisted_7_2, hoisted_8_2, hoisted_9_2, hoisted_10_2, hoisted_11_2, hoisted_12_2, deduped_13_2, deduped_14_2, deduped_15_2, deduped_16_2, deduped_17_2, deduped_18_2, deduped_19_2, deduped_20_2, deduped_21_2, deduped_22_2;
+            deduped_22_2 := arg2_1[i_2];
+            deduped_21_2 := ObjectList( hoisted_3_1[i_2] );
+            deduped_20_2 := MorphismMatrix( deduped_22_2 );
+            deduped_19_2 := ObjectList( hoisted_5_1[i_2 + hoisted_4_1] );
+            deduped_18_2 := ObjectList( Range( deduped_22_2 ) );
+            deduped_17_2 := ObjectList( Source( deduped_22_2 ) );
+            deduped_16_2 := Length( deduped_18_2 );
+            deduped_15_2 := Length( deduped_17_2 );
+            deduped_14_2 := [ 1 .. deduped_16_2 ];
+            deduped_13_2 := [ 1 .. deduped_15_2 ];
+            hoisted_12_2 := List( deduped_19_2, UnderlyingVertex );
+            hoisted_11_2 := List( deduped_21_2, UnderlyingVertex );
+            hoisted_10_2 := List( deduped_18_2, UnderlyingVertex );
+            hoisted_9_2 := List( deduped_17_2, UnderlyingVertex );
+            hoisted_8_2 := deduped_14_2;
+            hoisted_7_2 := List( deduped_20_2, function ( logic_new_func_x_3 )
                     return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
                             return UnderlyingVertex( Range( logic_new_func_x_4 ) );
                         end );
                 end );
-            hoisted_5_2 := List( deduped_14_2, UnderlyingVertex );
-            hoisted_4_2 := List( deduped_17_2, function ( logic_new_func_x_3 )
+            hoisted_6_2 := List( deduped_20_2, function ( logic_new_func_x_3 )
                     return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
                             return UnderlyingVertex( Source( logic_new_func_x_4 ) );
                         end );
                 end );
-            hoisted_3_2 := List( deduped_17_2, function ( logic_new_func_list_3 )
+            hoisted_5_2 := List( deduped_20_2, function ( logic_new_func_x_3 )
+                    return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
+                            return Paths( UnderlyingQuiverAlgebraElement( logic_new_func_x_4 ) );
+                        end );
+                end );
+            hoisted_4_2 := List( deduped_20_2, function ( logic_new_func_x_3 )
+                    return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
+                            return IsZero( UnderlyingQuiverAlgebraElement( logic_new_func_x_4 ) );
+                        end );
+                end );
+            hoisted_3_2 := List( deduped_20_2, function ( logic_new_func_x_3 )
+                    return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
+                            return AlgebraOfElement( UnderlyingQuiverAlgebraElement( logic_new_func_x_4 ) );
+                        end );
+                end );
+            hoisted_2_2 := List( deduped_20_2, function ( logic_new_func_list_3 )
                     return List( logic_new_func_list_3, CapCategory );
                 end );
-            hoisted_2_2 := deduped_11_2;
-            hoisted_1_2 := List( deduped_17_2, function ( logic_new_func_list_3 )
+            hoisted_1_2 := List( deduped_20_2, function ( logic_new_func_list_3 )
                     return List( logic_new_func_list_3, IsCapCategoryMorphism );
                 end );
             return function (  )
-                        if IsMatrixObj( deduped_17_2 ) and not (deduped_12_2 = NumberRows( deduped_17_2 ) and deduped_13_2 = NumberColumns( deduped_17_2 )) then
+                        if IsMatrixObj( deduped_20_2 ) and not (deduped_15_2 = NumberRows( deduped_20_2 ) and deduped_16_2 = NumberColumns( deduped_20_2 )) then
                             return false;
-                        elif not ForAll( deduped_10_2, function ( i_4 )
-                                     local hoisted_1_4;
+                        elif not ForAll( deduped_13_2, function ( i_4 )
+                                     local hoisted_1_4, hoisted_2_4, hoisted_3_4, hoisted_4_4, hoisted_5_4, hoisted_6_4, hoisted_7_4;
+                                     hoisted_7_4 := hoisted_7_2[i_4];
+                                     hoisted_6_4 := hoisted_6_2[i_4];
+                                     hoisted_5_4 := hoisted_5_2[i_4];
+                                     hoisted_4_4 := hoisted_4_2[i_4];
+                                     hoisted_3_4 := hoisted_3_2[i_4];
+                                     hoisted_2_4 := hoisted_2_2[i_4];
                                      hoisted_1_4 := hoisted_1_2[i_4];
-                                     return ForAll( hoisted_2_2, function ( j_5 )
-                                             return hoisted_1_4[j_5];
+                                     return ForAll( hoisted_8_2, function ( j_5 )
+                                             local hoisted_1_5, hoisted_2_5, deduped_3_5;
+                                             deduped_3_5 := hoisted_5_4[j_5];
+                                             hoisted_2_5 := hoisted_7_4[j_5];
+                                             hoisted_1_5 := hoisted_6_4[j_5];
+                                             return (hoisted_1_4[j_5] and IS_IDENTICAL_OBJ( hoisted_1_1, hoisted_2_4[j_5] ) and function (  )
+                                                       if not IS_IDENTICAL_OBJ( hoisted_3_4[j_5], hoisted_2_1 ) then
+                                                           return false;
+                                                       elif hoisted_4_4[j_5] then
+                                                           return true;
+                                                       elif not ForAll( deduped_3_5, function ( p_7 )
+                                                                    return hoisted_1_5 = Source( p_7 );
+                                                                end ) then
+                                                           return false;
+                                                       elif not ForAll( deduped_3_5, function ( p_7 )
+                                                                    return hoisted_2_5 = Target( p_7 );
+                                                                end ) then
+                                                           return false;
+                                                       else
+                                                           return true;
+                                                       fi;
+                                                       return;
+                                                   end(  ));
                                          end );
                                  end ) then
                             return false;
-                        elif not ForAll( deduped_10_2, function ( i_4 )
-                                     local hoisted_1_4;
-                                     hoisted_1_4 := hoisted_3_2[i_4];
-                                     return ForAll( hoisted_2_2, function ( j_5 )
-                                             return IS_IDENTICAL_OBJ( hoisted_1_1, hoisted_1_4[j_5] );
-                                         end );
-                                 end ) then
-                            return false;
-                        elif not ForAll( deduped_10_2, function ( i_4 )
+                        elif not ForAll( deduped_13_2, function ( i_4 )
                                      local hoisted_1_4, hoisted_2_4, hoisted_3_4;
-                                     hoisted_3_4 := hoisted_6_2[i_4];
-                                     hoisted_2_4 := hoisted_5_2[i_4];
-                                     hoisted_1_4 := hoisted_4_2[i_4];
-                                     return ForAll( hoisted_2_2, function ( j_5 )
-                                             return (hoisted_1_4[j_5] = hoisted_2_4 and hoisted_3_4[j_5] = hoisted_7_2[j_5]);
+                                     hoisted_3_4 := hoisted_7_2[i_4];
+                                     hoisted_2_4 := hoisted_9_2[i_4];
+                                     hoisted_1_4 := hoisted_6_2[i_4];
+                                     return ForAll( hoisted_8_2, function ( j_5 )
+                                             return (hoisted_1_4[j_5] = hoisted_2_4 and hoisted_3_4[j_5] = hoisted_10_2[j_5]);
                                          end );
                                  end ) then
                             return false;
@@ -1114,20 +1156,20 @@ function ( cat_1, arg2_1 )
                         fi;
                         return;
                     end(  ) and function (  )
-                        if deduped_12_2 <> Length( deduped_18_2 ) then
+                        if deduped_15_2 <> Length( deduped_21_2 ) then
                             return false;
                         else
-                            return ForAll( deduped_10_2, function ( i_4 )
-                                    return hoisted_5_2[i_4] = hoisted_8_2[i_4];
+                            return ForAll( deduped_13_2, function ( i_4 )
+                                    return hoisted_9_2[i_4] = hoisted_11_2[i_4];
                                 end );
                         fi;
                         return;
                     end(  ) and function (  )
-                      if deduped_13_2 <> Length( deduped_16_2 ) then
+                      if deduped_16_2 <> Length( deduped_19_2 ) then
                           return false;
                       else
-                          return ForAll( deduped_11_2, function ( i_4 )
-                                  return hoisted_7_2[i_4] = hoisted_9_2[i_4];
+                          return ForAll( deduped_14_2, function ( i_4 )
+                                  return hoisted_10_2[i_4] = hoisted_12_2[i_4];
                               end );
                       fi;
                       return;
@@ -1143,89 +1185,125 @@ end
         
 ########
 function ( cat_1, arg2_1 )
-    local hoisted_1_1;
-    hoisted_1_1 := UnderlyingCategory( UnderlyingCategory( cat_1 ) );
+    local hoisted_1_1, hoisted_2_1, deduped_3_1;
+    deduped_3_1 := UnderlyingCategory( UnderlyingCategory( cat_1 ) );
+    hoisted_2_1 := UnderlyingQuiverAlgebra( deduped_3_1 );
+    hoisted_1_1 := deduped_3_1;
     return ForAll( [ LowerBoundOfDgComplex( arg2_1 ) .. UpperBoundOfDgComplex( arg2_1 ) ], function ( i_2 )
-            local hoisted_1_2, hoisted_2_2, hoisted_3_2, hoisted_4_2, hoisted_5_2, hoisted_6_2, hoisted_7_2, hoisted_8_2, hoisted_9_2, hoisted_10_2, hoisted_11_2, hoisted_12_2, hoisted_13_2, hoisted_14_2, deduped_15_2, deduped_16_2, deduped_17_2, deduped_18_2, deduped_19_2, deduped_20_2, deduped_21_2, deduped_22_2, deduped_23_2;
-            deduped_23_2 := arg2_1 ^ i_2;
-            deduped_22_2 := arg2_1 ^ (i_2 + 1);
-            deduped_21_2 := MorphismMatrix( deduped_23_2 );
-            deduped_20_2 := ObjectList( Range( deduped_23_2 ) );
-            deduped_19_2 := ObjectList( Source( deduped_23_2 ) );
-            deduped_18_2 := Length( deduped_20_2 );
-            deduped_17_2 := Length( deduped_19_2 );
-            deduped_16_2 := [ 1 .. deduped_17_2 ];
-            deduped_15_2 := [ 1 .. Length( ObjectList( Range( deduped_22_2 ) ) ) ];
-            hoisted_13_2 := deduped_15_2;
-            hoisted_12_2 := List( MorphismMatrix( deduped_22_2 ), function ( logic_new_func_list_3 )
+            local hoisted_1_2, hoisted_2_2, hoisted_3_2, hoisted_4_2, hoisted_5_2, hoisted_6_2, hoisted_7_2, hoisted_8_2, hoisted_9_2, hoisted_10_2, hoisted_11_2, hoisted_12_2, hoisted_13_2, hoisted_14_2, hoisted_15_2, hoisted_16_2, hoisted_17_2, deduped_18_2, deduped_19_2, deduped_20_2, deduped_21_2, deduped_22_2, deduped_23_2, deduped_24_2, deduped_25_2, deduped_26_2;
+            deduped_26_2 := arg2_1 ^ i_2;
+            deduped_25_2 := arg2_1 ^ (i_2 + 1);
+            deduped_24_2 := MorphismMatrix( deduped_26_2 );
+            deduped_23_2 := ObjectList( Range( deduped_26_2 ) );
+            deduped_22_2 := ObjectList( Source( deduped_26_2 ) );
+            deduped_21_2 := Length( deduped_23_2 );
+            deduped_20_2 := Length( deduped_22_2 );
+            deduped_19_2 := [ 1 .. deduped_20_2 ];
+            deduped_18_2 := [ 1 .. Length( ObjectList( Range( deduped_25_2 ) ) ) ];
+            hoisted_16_2 := deduped_18_2;
+            hoisted_15_2 := List( MorphismMatrix( deduped_25_2 ), function ( logic_new_func_list_3 )
                     return List( logic_new_func_list_3, UnderlyingQuiverAlgebraElement );
                 end );
-            hoisted_11_2 := List( deduped_21_2, function ( logic_new_func_list_3 )
+            hoisted_14_2 := List( deduped_24_2, function ( logic_new_func_list_3 )
                     return List( logic_new_func_list_3, UnderlyingQuiverAlgebraElement );
                 end );
-            hoisted_2_2 := [ 1 .. deduped_18_2 ];
-            hoisted_14_2 := List( deduped_16_2, function ( logic_new_func_x_3 )
+            hoisted_8_2 := [ 1 .. deduped_21_2 ];
+            hoisted_17_2 := List( deduped_19_2, function ( logic_new_func_x_3 )
                     local hoisted_1_3;
-                    hoisted_1_3 := hoisted_11_2[logic_new_func_x_3];
-                    return List( hoisted_13_2, function ( logic_new_func_x_4 )
-                            return IsZero( Iterated( List( hoisted_2_2, function ( logic_new_func_x_5 )
-                                        return hoisted_1_3[logic_new_func_x_5] * hoisted_12_2[logic_new_func_x_5][logic_new_func_x_4];
+                    hoisted_1_3 := hoisted_14_2[logic_new_func_x_3];
+                    return List( hoisted_16_2, function ( logic_new_func_x_4 )
+                            return IsZero( Iterated( List( hoisted_8_2, function ( logic_new_func_x_5 )
+                                        return hoisted_1_3[logic_new_func_x_5] * hoisted_15_2[logic_new_func_x_5][logic_new_func_x_4];
                                     end ), function ( alpha_5, beta_5 )
                                       return alpha_5 + beta_5;
                                   end ) );
                         end );
                 end );
-            hoisted_10_2 := ForAny( [ deduped_18_2, Length( ObjectList( Source( deduped_22_2 ) ) ) ], IsZero );
-            hoisted_8_2 := List( deduped_15_2, function ( logic_new_func_x_3 )
+            hoisted_13_2 := ForAny( [ deduped_21_2, Length( ObjectList( Source( deduped_25_2 ) ) ) ], IsZero );
+            hoisted_11_2 := List( deduped_18_2, function ( logic_new_func_x_3 )
                     return true;
                 end );
-            hoisted_9_2 := List( deduped_16_2, function ( logic_new_func_x_3 )
-                    return hoisted_8_2;
+            hoisted_12_2 := List( deduped_19_2, function ( logic_new_func_x_3 )
+                    return hoisted_11_2;
                 end );
-            hoisted_7_2 := List( deduped_20_2, UnderlyingVertex );
-            hoisted_6_2 := List( deduped_21_2, function ( logic_new_func_x_3 )
+            hoisted_10_2 := List( deduped_23_2, UnderlyingVertex );
+            hoisted_9_2 := List( deduped_22_2, UnderlyingVertex );
+            hoisted_7_2 := List( deduped_24_2, function ( logic_new_func_x_3 )
                     return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
                             return UnderlyingVertex( Range( logic_new_func_x_4 ) );
                         end );
                 end );
-            hoisted_5_2 := List( deduped_19_2, UnderlyingVertex );
-            hoisted_4_2 := List( deduped_21_2, function ( logic_new_func_x_3 )
+            hoisted_6_2 := List( deduped_24_2, function ( logic_new_func_x_3 )
                     return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
                             return UnderlyingVertex( Source( logic_new_func_x_4 ) );
                         end );
                 end );
-            hoisted_3_2 := List( deduped_21_2, function ( logic_new_func_list_3 )
+            hoisted_5_2 := List( deduped_24_2, function ( logic_new_func_x_3 )
+                    return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
+                            return Paths( UnderlyingQuiverAlgebraElement( logic_new_func_x_4 ) );
+                        end );
+                end );
+            hoisted_4_2 := List( deduped_24_2, function ( logic_new_func_x_3 )
+                    return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
+                            return IsZero( UnderlyingQuiverAlgebraElement( logic_new_func_x_4 ) );
+                        end );
+                end );
+            hoisted_3_2 := List( deduped_24_2, function ( logic_new_func_x_3 )
+                    return List( logic_new_func_x_3, function ( logic_new_func_x_4 )
+                            return AlgebraOfElement( UnderlyingQuiverAlgebraElement( logic_new_func_x_4 ) );
+                        end );
+                end );
+            hoisted_2_2 := List( deduped_24_2, function ( logic_new_func_list_3 )
                     return List( logic_new_func_list_3, CapCategory );
                 end );
-            hoisted_1_2 := List( deduped_21_2, function ( logic_new_func_list_3 )
+            hoisted_1_2 := List( deduped_24_2, function ( logic_new_func_list_3 )
                     return List( logic_new_func_list_3, IsCapCategoryMorphism );
                 end );
             return function (  )
-                      if IsMatrixObj( deduped_21_2 ) and not (deduped_17_2 = NumberRows( deduped_21_2 ) and deduped_18_2 = NumberColumns( deduped_21_2 )) then
+                      if IsMatrixObj( deduped_24_2 ) and not (deduped_20_2 = NumberRows( deduped_24_2 ) and deduped_21_2 = NumberColumns( deduped_24_2 )) then
                           return false;
-                      elif not ForAll( deduped_16_2, function ( i_4 )
-                                   local hoisted_1_4;
+                      elif not ForAll( deduped_19_2, function ( i_4 )
+                                   local hoisted_1_4, hoisted_2_4, hoisted_3_4, hoisted_4_4, hoisted_5_4, hoisted_6_4, hoisted_7_4;
+                                   hoisted_7_4 := hoisted_7_2[i_4];
+                                   hoisted_6_4 := hoisted_6_2[i_4];
+                                   hoisted_5_4 := hoisted_5_2[i_4];
+                                   hoisted_4_4 := hoisted_4_2[i_4];
+                                   hoisted_3_4 := hoisted_3_2[i_4];
+                                   hoisted_2_4 := hoisted_2_2[i_4];
                                    hoisted_1_4 := hoisted_1_2[i_4];
-                                   return ForAll( hoisted_2_2, function ( j_5 )
-                                           return hoisted_1_4[j_5];
+                                   return ForAll( hoisted_8_2, function ( j_5 )
+                                           local hoisted_1_5, hoisted_2_5, deduped_3_5;
+                                           deduped_3_5 := hoisted_5_4[j_5];
+                                           hoisted_2_5 := hoisted_7_4[j_5];
+                                           hoisted_1_5 := hoisted_6_4[j_5];
+                                           return (hoisted_1_4[j_5] and IS_IDENTICAL_OBJ( hoisted_1_1, hoisted_2_4[j_5] ) and function (  )
+                                                     if not IS_IDENTICAL_OBJ( hoisted_3_4[j_5], hoisted_2_1 ) then
+                                                         return false;
+                                                     elif hoisted_4_4[j_5] then
+                                                         return true;
+                                                     elif not ForAll( deduped_3_5, function ( p_7 )
+                                                                  return hoisted_1_5 = Source( p_7 );
+                                                              end ) then
+                                                         return false;
+                                                     elif not ForAll( deduped_3_5, function ( p_7 )
+                                                                  return hoisted_2_5 = Target( p_7 );
+                                                              end ) then
+                                                         return false;
+                                                     else
+                                                         return true;
+                                                     fi;
+                                                     return;
+                                                 end(  ));
                                        end );
                                end ) then
                           return false;
-                      elif not ForAll( deduped_16_2, function ( i_4 )
-                                   local hoisted_1_4;
-                                   hoisted_1_4 := hoisted_3_2[i_4];
-                                   return ForAll( hoisted_2_2, function ( j_5 )
-                                           return IS_IDENTICAL_OBJ( hoisted_1_1, hoisted_1_4[j_5] );
-                                       end );
-                               end ) then
-                          return false;
-                      elif not ForAll( deduped_16_2, function ( i_4 )
+                      elif not ForAll( deduped_19_2, function ( i_4 )
                                    local hoisted_1_4, hoisted_2_4, hoisted_3_4;
-                                   hoisted_3_4 := hoisted_6_2[i_4];
-                                   hoisted_2_4 := hoisted_5_2[i_4];
-                                   hoisted_1_4 := hoisted_4_2[i_4];
-                                   return ForAll( hoisted_2_2, function ( j_5 )
-                                           return (hoisted_1_4[j_5] = hoisted_2_4 and hoisted_3_4[j_5] = hoisted_7_2[j_5]);
+                                   hoisted_3_4 := hoisted_7_2[i_4];
+                                   hoisted_2_4 := hoisted_9_2[i_4];
+                                   hoisted_1_4 := hoisted_6_2[i_4];
+                                   return ForAll( hoisted_8_2, function ( j_5 )
+                                           return (hoisted_1_4[j_5] = hoisted_2_4 and hoisted_3_4[j_5] = hoisted_10_2[j_5]);
                                        end );
                                end ) then
                           return false;
@@ -1233,12 +1311,12 @@ function ( cat_1, arg2_1 )
                           return true;
                       fi;
                       return;
-                  end(  ) and ForAll( deduped_16_2, function ( i_3 )
+                  end(  ) and ForAll( deduped_19_2, function ( i_3 )
                       local hoisted_1_3, hoisted_2_3;
-                      hoisted_2_3 := hoisted_14_2[i_3];
-                      hoisted_1_3 := hoisted_9_2[i_3];
-                      return ForAll( hoisted_13_2, function ( j_4 )
-                              if hoisted_10_2 then
+                      hoisted_2_3 := hoisted_17_2[i_3];
+                      hoisted_1_3 := hoisted_12_2[i_3];
+                      return ForAll( hoisted_16_2, function ( j_4 )
+                              if hoisted_13_2 then
                                   return hoisted_1_3[j_4];
                               else
                                   return hoisted_2_3[j_4];

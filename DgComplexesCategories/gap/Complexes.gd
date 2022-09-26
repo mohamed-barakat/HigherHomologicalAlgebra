@@ -30,14 +30,35 @@ DeclareOperation( "DgCochainComplex", [ IsDgCochainComplexCategory, IsDenseList,
 
 DeclareAttribute( "Differentials", IsDgComplex );
 KeyDependentOperation( "DifferentialAt", IsDgComplex, IsInt, ReturnTrue );
+
 DeclareOperation( "\^", [ IsDgComplex, IsInt ] );
+
+CapJitAddTypeSignature( "\^", [ IsDgComplex, IsInt ], function ( input_types )
+    
+    return CapJitDataTypeOfMorphismOfCategory( UnderlyingCategory( input_types[1].category ) );
+    
+end );
 
 DeclareAttribute( "Objects", IsDgComplex );
 KeyDependentOperation( "ObjectAt", IsDgComplex, IsInt, ReturnTrue );
+
 DeclareOperation( "\[\]", [ IsDgComplex, IsInt ] );
 
+CapJitAddTypeSignature( "\[\]", [ IsDgComplex, IsInt ], function ( input_types )
+    
+    return CapJitDataTypeOfObjectOfCategory( UnderlyingCategory( input_types[1].category ) );
+    
+end );
 
 DeclareAttribute( "LowerBoundOfDgComplex", IsDgComplex );
+
+CapJitAddTypeSignature( "LowerBoundOfDgComplex", [ IsDgComplex ], IsInt );
+
 DeclareAttribute( "UpperBoundOfDgComplex", IsDgComplex );
 
+CapJitAddTypeSignature( "UpperBoundOfDgComplex", [ IsDgComplex ], IsInt );
+
 DeclareOperation( "Display", [ IsDgComplex, IsInt, IsInt ] );
+
+CapJitAddTypeSignature( "Minimum", [ IsInt, IsInt ], IsInt );
+CapJitAddTypeSignature( "Maximum", [ IsInt, IsInt ], IsInt );

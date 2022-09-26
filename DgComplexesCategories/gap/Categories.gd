@@ -18,7 +18,13 @@ DeclareCategory( "IsDgBoundedCochainComplexCategory", IsBoundedDgChainOrCochainC
 ####################
 
 DeclareAttribute( "DgChainComplexCategory", IsCapCategory );
+
 DeclareAttribute( "DgCochainComplexCategory", IsCapCategory );
 
+CapJitAddTypeSignature( "UnderlyingCategory", [ IsDgChainOrCochainComplexCategory ], function ( input_types )
+    
+    return CapJitDataTypeOfCategory( UnderlyingCategory( input_types[1].category ) );
+    
+end );
 
 DeclareGlobalFunction( "ADD_BASIC_FUNCTIONS_TO_DG_COCHAIN_COMPLEX_CATEGORY" );

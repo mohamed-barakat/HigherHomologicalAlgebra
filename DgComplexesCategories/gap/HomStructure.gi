@@ -36,7 +36,7 @@ InstallGlobalFunction( ADD_FUNCTIONS_OF_HOMOMORPHISM_STRUCTURE_TO_DG_COCHAIN_COM
         
         range_cat := RangeCategoryOfHomomorphismStructure( cat );
         
-        dgCh_range_cat := DgCochainComplexCategory( range_cat );
+        dgCh_range_cat := RangeCategoryOfHomomorphismStructure( dgCh_cat );
         
         distinguished_object := DistinguishedObjectOfHomomorphismStructure( cat );
         
@@ -62,7 +62,8 @@ InstallGlobalFunction( ADD_FUNCTIONS_OF_HOMOMORPHISM_STRUCTURE_TO_DG_COCHAIN_COM
         cat := UnderlyingCategory( dgCh_cat );
         
         range_cat := RangeCategoryOfHomomorphismStructure( cat );
-        dgCh_range_cat := DgCochainComplexCategory( range_cat );
+        
+        dgCh_range_cat := RangeCategoryOfHomomorphismStructure( dgCh_cat );
         
         l_B := LowerBoundOfDgComplex( B );
         u_B := UpperBoundOfDgComplex( B );
