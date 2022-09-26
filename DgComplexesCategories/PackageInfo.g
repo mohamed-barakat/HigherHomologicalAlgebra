@@ -72,8 +72,9 @@ Dependencies := rec(
                             [ "AutoDoc", ">= 2019.09.04" ],
                             [ "ComplexesCategories", ">= 2022.09-01" ]
                          ],
-  SuggestedOtherPackages := [ ],
-   
+  SuggestedOtherPackages := [
+                              [ "Algebroids", ">=2022.09.01" ]
+                            ],
   ExternalConditions := [ ],
 ),
 

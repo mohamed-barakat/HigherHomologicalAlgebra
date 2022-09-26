@@ -52,26 +52,26 @@ end );
 ##
 InstallMethod( DgCochainComplex,
         [ IsDgCochainComplexCategory, IsZFunction, IsInt, IsInt ],
-  function( dgCh_cat, diffs, lower_bound, upper_bound )
 
-    return CreateCapCategoryObjectWithAttributes( dgCh_cat,
-                              Differentials, diffs,
-                              Objects, ApplyMap( diffs, Source ),
-                              LowerBoundOfDgComplex, lower_bound,
-                              UpperBoundOfDgComplex, upper_bound
-                            );
-
-end );
+  { dgCh_cat, diffs, lower_bound, upper_bound } ->
+      
+      CreateCapCategoryObjectWithAttributes( dgCh_cat,
+                          Differentials, diffs,
+                            Objects, ApplyMap( diffs, Source ),
+                            LowerBoundOfDgComplex, lower_bound,
+                            UpperBoundOfDgComplex, upper_bound
+                          )
+);
 
 ##
 InstallMethod( DgCochainComplex,
         [ IsDgCochainComplexCategory, IsDenseList, IsInt ],
-
+        
   function( dgCh_cat, diffs, lower_bound )
     local zero_obj, func, C;
-
+    
     zero_obj := ZeroObject( UnderlyingCategory( dgCh_cat ) );
-
+    
     func := function( i )
               
               if i < lower_bound - 1 then
@@ -85,17 +85,17 @@ InstallMethod( DgCochainComplex,
               else
                 return UniversalMorphismIntoZeroObject( zero_obj );
               fi;
-            
+              
             end;
-    
+            
     return DgCochainComplex( dgCh_cat, AsZFunction( func ), lower_bound, lower_bound + Length( diffs ) );
     
 end );
 
 ##
 InstallMethod( DifferentialAtOp,
-               [ IsDgComplex, IsInt ],
-
+        [ IsDgComplex, IsInt ],
+        
   { C, i } -> Differentials( C )[ i ]
 );
 
@@ -105,8 +105,8 @@ InstallMethod( \^, [ IsDgComplex, IsInt], DifferentialAt );
 
 ##
 InstallMethod( ObjectAtOp,
-               [ IsDgComplex, IsInt ],
-
+        [ IsDgComplex, IsInt ],
+        
   { C, i } -> Objects( C )[ i ]
 );
 
@@ -164,7 +164,7 @@ InstallMethod( Display,
 
   function( C, m, n )
     local s, i;
-      
+    
     for i in Reversed( [ m .. n ] ) do
       if i <> n then
         Print( "  ", " Λ", "\n" );
@@ -190,7 +190,7 @@ end );
 ##
 InstallMethod( Display,
         [ IsDgComplex ],
-
+        
   function( C )
 
     if HasLowerBoundOfDgComplex( C ) and HasUpperBoundOfDgComplex( C ) then
@@ -198,7 +198,7 @@ InstallMethod( Display,
     else
         TryNextMethod( );
     fi;
-
+    
 end );
 
 ##
@@ -212,7 +212,7 @@ InstallMethod( LaTeXOutput,
     u_C := UpperBoundOfDgComplex( C );
     
     latex_string := "\\begin{array}{c}\n";
-      
+    
     latex_string := Concatenation( latex_string, LaTeXOutput( C[ u_C ] ), "\n " );
     
     for i in Reversed( [ l_C .. u_C - 1 ] ) do
@@ -230,3 +230,4 @@ InstallMethod( LaTeXOutput,
     return Concatenation( latex_string, "\\end{array}" );
     
 end );
+
