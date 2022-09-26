@@ -29,55 +29,56 @@ BindGlobal( "TheTypeOfDgCochainMorphisms",
 
 
 ##
-InstallMethod( DgCochainComplexMorphism,
-            [IsDgCochainComplex, IsDgCochainComplex, IsInt, IsZFunction, IsInt, IsInt ],
+InstallOtherMethodForCompilerForCAP( DgCochainComplexMorphism,
+            [ IsDgCochainComplexCategory, IsDgCochainComplex, IsDgCochainComplex, IsList, IsList ],
 
-  function ( S, R, degree, morphisms, lower_bound, upper_bound )
-
-    return CreateCapCategoryMorphismWithAttributes( CapCategory( S ),
+  function ( dgCh_cat, S, R, tilted_morphisms, pair_of_bounds )
+    
+    return CreateCapCategoryMorphismWithAttributes( dgCh_cat,
             S,
             R,
-            Morphisms, morphisms,
-            DegreeOfDgComplexMorphism, degree,
-            LowerBoundOfDgComplexMorphism, lower_bound,
-            UpperBoundOfDgComplexMorphism, upper_bound
+            DegreeOfDgComplexMorphism, tilted_morphisms[1],
+            Morphisms, tilted_morphisms[2],
+            LowerBoundOfDgComplexMorphism, pair_of_bounds[1],
+            UpperBoundOfDgComplexMorphism, pair_of_bounds[2]
             );
 end );
 
 ##
-InstallMethod( DgCochainComplexMorphism,
-            [IsDgCochainComplex, IsDgCochainComplex, IsInt, IsZFunction ],
+InstallOtherMethodForCompilerForCAP( DgCochainComplexMorphism,
+            [ IsDgCochainComplexCategory, IsDgCochainComplex, IsDgCochainComplex, IsList ],
+        
+  function ( dgCh_cat, S, R, tilted_morphisms )
 
-  function ( S, R, degree, morphisms )
-
-    return CreateCapCategoryMorphismWithAttributes( CapCategory( S ),
+    return CreateCapCategoryMorphismWithAttributes( dgCh_cat,
             S,
             R,
-            Morphisms, morphisms,
-            DegreeOfDgComplexMorphism, degree,
+            DegreeOfDgComplexMorphism, tilted_morphisms[1],
+            Morphisms, tilted_morphisms[2],
             LowerBoundOfDgComplexMorphism, Minimum( LowerBoundOfDgComplex( S ), LowerBoundOfDgComplex( R ) ),
             UpperBoundOfDgComplexMorphism, Maximum( UpperBoundOfDgComplex( S ), UpperBoundOfDgComplex( R ) )
             );
 end );
 
 ##
-InstallMethod( DgCochainComplexMorphism,
-        [IsDgCochainComplex, IsDgCochainComplex, IsInt, IsDenseList, IsInt ],
-  function( S, R, degree, mors, lower_bound )
-  local z_func, phi;
-
-  z_func :=
-    AsZFunction(
+InstallOtherMethodForCompilerForCAP( DgCochainComplexMorphism,
+        [ IsDgCochainComplexCategory, IsDgCochainComplex, IsDgCochainComplex, IsInt, IsDenseList, IsInt ],
+        
+  function( dgCh_cat, S, R, degree, mors, lower_bound )
+    local z_func, phi;
+    
+    z_func :=
+      AsZFunction(
         function( i )
           if i >= lower_bound and i <= lower_bound + Length( mors ) - 1 then
-            return mors[i - lower_bound + 1];
+              return mors[i - lower_bound + 1];
           else
-            return ZeroMorphism( S[i], R[i + degree] );
+              return ZeroMorphism( UnderlyingCategory( dgCh_cat ), S[i], R[i + degree] );
           fi;
-         end );
-
-  return DgCochainComplexMorphism( S, R, degree, z_func, lower_bound, lower_bound + Length( mors ) - 1 );
-
+    end );
+    
+    return DgCochainComplexMorphism( dgCh_cat, S, R, Pair( degree, z_func ), Pair( lower_bound, lower_bound + Length( mors ) - 1 ) );
+    
 end );
 
 ##

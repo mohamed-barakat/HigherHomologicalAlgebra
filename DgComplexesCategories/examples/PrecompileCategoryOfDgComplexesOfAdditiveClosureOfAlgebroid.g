@@ -19,6 +19,9 @@ LoadPackage( "CompilerForCAP", false );
 ReadPackage( "Algebroids", "gap/CompilerLogic.gi" );
 #! true
 
+ReadPackage( "DgComplexesCategories", "gap/CompilerLogic.gi" );
+#! true
+
 category_constructor := { Q, F } -> DgComplexesOfAdditiveClosureOfAlgebroid( Algebroid( F, MATRIX_CATEGORY( Q : FinalizeCategory := true ) : FinalizeCategory := true ) );
 
 Q := HomalgFieldOfRationals( );;
@@ -29,8 +32,7 @@ A := QF / [ QF.ab ];;
 
 # only valid for the construction above
 # FIXME: IsInt should be IsRat, but specializations of types are not yet supported by CompilerForCAP
-CapJitAddTypeSignature( "CoefficientsOfPaths", [ IsList, IsPathAlgebraElement ], rec( filter := IsList, element_type := rec( filter := IsInt ) ) );
-CapJitAddTypeSignature( "CoefficientsOfPaths", [ IsList, IsQuotientOfPathAlgebraElement ], rec( filter := IsList, element_type := rec( filter := IsInt ) ) );
+CapJitAddTypeSignature( "CoefficientsOfPaths", [ IsList, IsQuiverAlgebraElement ], rec( filter := IsList, element_type := rec( filter := IsInt ) ) );
 
 given_arguments := [ Q, F ];
 compiled_category_name := "CategoryOfDgComplexesOfAdditiveClosureOfAlgebroidPrecompiled";;

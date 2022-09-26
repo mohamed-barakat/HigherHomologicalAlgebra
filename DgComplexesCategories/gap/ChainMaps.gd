@@ -28,14 +28,6 @@ DeclareOperation( "DgCochainComplexMorphism", [ IsDgCochainComplex, IsDgCochainC
 
 DeclareOperation( "DgCochainComplexMorphism", [ IsDgCochainComplex, IsDgCochainComplex, IsInt, IsDenseList, IsInt ] );
 
-CapJitAddTypeSignature( "DgCochainComplexMorphism", [ IsDgCochainComplex, IsDgCochainComplex, IsInt, IsList, IsInt ], function ( input_types )
-    
-    Assert( 0, IsDgCochainComplexCategory( input_types[1].category ) );
-    
-    return CapJitDataTypeOfMorphismOfCategory( input_types[1].category );
-    
-end );
-
 DeclareAttribute( "DegreeOfDgComplexMorphism", IsDgComplexMorphism );
 
 CapJitAddTypeSignature( "DegreeOfDgComplexMorphism", [ IsDgComplexMorphism ], IsInt );
